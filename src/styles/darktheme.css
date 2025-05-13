@@ -1,0 +1,112 @@
+/* General Styles */
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: #ff5722;
+    font-weight: bold;
+  }
+  
+  p {
+    color: #b0b0b0;
+  }
+  
+  /* Button Styles */
+  button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #555;
+  }
+  
+  /* Input Styles */
+  input, select, textarea {
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #444;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  input:focus, select:focus, textarea:focus {
+    border-color: #ff5722;
+    outline: none;
+  }
+  
+  /* Navigation Menu */
+  nav {
+    background-color: #1a1a1a;
+    padding: 10px;
+  }
+  
+  nav a {
+    color: #ff5722;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Card Styles */
+  .card {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+  }
+  
+  .card-header {
+    font-size: 1.5em;
+    color: #ff5722;
+  }
+  
+  .card-body {
+    color: #b0b0b0;
+  }
+  
+  /* Table Styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 10px;
+    border: 1px solid #333;
+  }
+  
+  th {
+    background-color: #333;
+    color: #ff5722;
+  }
+  
+  td {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+  }
+  
+  /* Footer Styles */
+  footer {
+    background-color: #1a1a1a;
+    color: #b0b0b0;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+  }
