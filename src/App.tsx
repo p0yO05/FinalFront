@@ -6,9 +6,9 @@ import Contestants from './Pages/Contestants'; // Página protegida (antes "Cont
 import Battles from './Pages/Battles';
 import Dictators from './Pages/Dictadors';
 import Market from './Pages/BlackMarket';
-import Login from './components/MainLogin';
+import Login from './components/Login/MainLogin';
 import PrivateRoute from './components/privateroute'; // Ruta protegida
-import Logo from './components/logo'; // Import the Logo component
+import Logo from './components/Shared/logo'; // Import the Logo component
 import './styles/darktheme.css'; // Import the dark theme CSS
 
 const App: React.FC = () => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Button from './Button';
-import { login } from '../utils/auth';
+import Button from '../Shared/Button';
+import { login } from '../../utils/auth';
 
 interface LoginProps {
   onLoginSuccess: (role: string) => void;
