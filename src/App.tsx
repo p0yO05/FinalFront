@@ -6,13 +6,13 @@ import Contestants from './Pages/Contestants'; // Página protegida (antes "Cont
 import Battles from './Pages/Battles';
 import Dictators from './Pages/Dictadors';
 import Market from './Pages/BlackMarket';
-import Login from './components/Login/MainLogin';
+// import Login from './components/Login/MainLogin';
 import PrivateRoute from './components/privateroute'; // Ruta protegida
 import Logo from './components/Shared/logo'; // Import the Logo component
 import './styles/darktheme.css'; // Import the dark theme CSS
 
 const App: React.FC = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Estado de autenticación
+  const [isAuthenticated, setIsAuthenticated] = useState(true); // Estado de autenticación
   const [role, setRole] = useState<string | null>(null); // Estado del rol
   const [data, setData] = useState<{ message: string } | null>(null);
 
@@ -35,8 +35,8 @@ const App: React.FC = () => {
         {isAuthenticated && <Logo />} {/* Display the logo if authenticated */}
         {data ? <p>{data.message}</p> : <p>Cargando Imperio...</p>}
         <Routes>
-          {/* Página pública: Login */}
-          <Route path="/" element={<Login onLoginSuccess={handleLoginSuccess} />} />
+  {/* Página pública: Login */}
+          <Route path="/" element={<PrivateRoute isAuthenticated={isAuthenticated} element={<Home />} />} />
 
           {/* Páginas protegidas */}
           <Route path="/home" element={<PrivateRoute isAuthenticated={isAuthenticated} element={<Home />} />} />
