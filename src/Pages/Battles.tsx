@@ -17,6 +17,7 @@ const Battles: React.FC = () => {
     try {
       const data = await getBattles();
       setBattles(data);
+      console.log(data)
     } catch (error) {
       console.error('Error al obtener las batallas:', error);
       setError('Hubo un problema al cargar las batallas.');

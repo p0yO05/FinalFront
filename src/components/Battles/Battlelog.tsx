@@ -12,8 +12,8 @@ const BattleLog: React.FC<BattleLogProps> = ({ battles }) => {
       <ul>
         {battles.map((battle) => (
           <li key={battle.id} style={{ marginBottom: '15px' }}>
-            <strong>{battle.date}</strong>
-            <p>{generateBattleNarration(battle, battle.contestant1, battle.contestant2)}</p>
+            <strong>{new Date(battle.createdAt).toLocaleDateString()}</strong>
+            <p> {battle.name} | <span style={{color:'blue'}}>{battle.contestant_1.nickname}</span> Vs <span style={{color:'red'}}>{battle.contestant_1.nickname}</span></p>
           </li>
         ))}
       </ul>
