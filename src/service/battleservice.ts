@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { API_BASE_URL } from '../config/config';
+import { Battle } from '../types/types';
 
-export const getBattles = async () => {
+export const getBattles = async () : Promise<Battle[]> => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/battles`);
+      const response = await axios.get<Battle[]>(`${API_BASE_URL}/battles`);
       return response.data;
     } catch (error) {
       console.error('Error al obtener battles:', error);

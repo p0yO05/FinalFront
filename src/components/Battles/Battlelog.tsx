@@ -1,13 +1,8 @@
 import React from 'react';
-
+import { Battle } from '../../types/types';
+import { generateBattleNarration } from '../../utils/BattleAI';
 interface BattleLogProps {
-  battles: {
-    id: string;
-    contestant1: string;
-    contestant2: string;
-    winner: string;
-    date: string;
-  }[];
+  battles: Battle[];
 }
 
 const BattleLog: React.FC<BattleLogProps> = ({ battles }) => {
@@ -16,8 +11,9 @@ const BattleLog: React.FC<BattleLogProps> = ({ battles }) => {
       <h2>Registro de Batallas</h2>
       <ul>
         {battles.map((battle) => (
-          <li key={battle.id} style={{ marginBottom: '10px' }}>
-            <strong>{battle.date}:</strong> {battle.contestant1} vs {battle.contestant2} - <em>{battle.winner ? `Ganador: ${battle.winner}` : 'Sin resultado'}</em>
+          <li key={battle.id} style={{ marginBottom: '15px' }}>
+            <strong>{battle.date}</strong>
+            <p>{generateBattleNarration(battle, battle.contestant1, battle.contestant2)}</p>
           </li>
         ))}
       </ul>
