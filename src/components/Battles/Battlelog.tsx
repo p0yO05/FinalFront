@@ -1,6 +1,6 @@
 import React from 'react';
 import { Battle } from '../../types/types';
-import { generateBattleNarration } from '../../utils/BattleAI';
+
 interface BattleLogProps {
   battles: Battle[];
 }
