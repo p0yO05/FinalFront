@@ -11,24 +11,24 @@ const Battles: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const fetchBattles = async () => {
-    setLoading(true);
-    setError('');
-    try {
-      const data = await getBattles();
-      setBattles(data);
-      console.log(data)
-    } catch (error) {
-      console.error('Error al obtener las batallas:', error);
-      setError('Hubo un problema al cargar las batallas.');
-    } finally {
-      setLoading(false);
-    }
+  const fetchSlaves = async () => {
+  setLoading(true);
+  setError('');
+  try {
+    const data = await getBattles();
+    setBattles(data);
+    console.log(data)
+  } catch (error) {
+    console.error('Error al obtener las batallas:', error);
+    setError('Hubo un problema al cargar las batallas.');
+  } finally {
+    setLoading(false);
+  }
   };
 
   useEffect(() => {
     if (showLog) {
-      fetchBattles();
+      fetchSlaves();
     }
     // Si quieres cargar siempre las batallas al montar el componente, quita el if y pon fetchBattles() solo
   }, [showLog]);

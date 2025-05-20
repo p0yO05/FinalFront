@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Menu from './Menu/Menu'; // Menú de navegación
 import Home from './Pages/Home';
-import Contestants from './Pages/Contestants'; // Página protegida (antes "Contestants")
+import Esclavos from './Pages/Esclavos';
 import Battles from './Pages/Battles';
 import Dictators from './Pages/Dictadors';
 import Market from './Pages/BlackMarket';
@@ -40,7 +40,7 @@ const App: React.FC = () => {
 
           {/* Páginas protegidas */}
           <Route path="/home" element={<PrivateRoute isAuthenticated={isAuthenticated} element={<Home />} />} />
-          <Route path="/esclavos" element={<PrivateRoute isAuthenticated={isAuthenticated} element={<Contestants />} />} />
+          <Route path="/esclavos" element={<PrivateRoute isAuthenticated={isAuthenticated} element={<Esclavos />} />} />
           <Route path="/battles" element={<PrivateRoute isAuthenticated={isAuthenticated} element={<Battles />} />} />
           <Route path="/dictators" element={<PrivateRoute isAuthenticated={isAuthenticated} element={<Dictators />} />} />
           <Route path="/market" element={<PrivateRoute isAuthenticated={isAuthenticated} element={<Market />} />} />

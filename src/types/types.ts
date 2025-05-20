@@ -49,3 +49,26 @@ export interface Dictador {
   territory: string;
   loyalty_to_Carolina: number;
 }
+
+export enum TransactionType {
+  SlaveToDictador = 'SlaveToDictador',
+  DictadorToDictador = 'DictadorToDictador',
+}
+
+export enum TransactionStatus {
+  Pending = 'Pending',
+  Completed = 'Completed',
+  Cancelled = 'Cancelled',
+}
+
+export interface BlackMarketTransaction {
+  id: string;
+  buyerEsclavoId?: string;      // Solo si es SlaveToDictador
+  buyerDictadorId?: string;     // Solo si es DictadorToDictador
+  sellerId: string;             // ID del dictador vendedor
+  item: string;
+  amount: number;
+  transactionType: TransactionType;
+  status: TransactionStatus;
+  createdAt: string;            // Fecha de la transacción
+}
