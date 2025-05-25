@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { getBattles } from '../service/battleservice';
 import BattleLog from '../components/Battles/Battlelog';
 import { Battle } from '../types/types';
+import SponsorLog from '../components/Sponsors/sponsorlog';
 
 const Battles: React.FC = () => {
   const navigate = useNavigate();
   const [showLog, setShowLog] = useState(false);
+  const [showSponsors, setShowSponsors] = useState(false);
   const [battles, setBattles] = useState<Battle[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -52,12 +54,20 @@ const Battles: React.FC = () => {
         >
           {showLog ? 'Ocultar Registro' : 'Ver Registro de Batallas'}
         </button>
+
+        <button
+          style={{ backgroundColor: '#444', color: 'white', padding: '10px 20px', border: 'none', cursor: 'pointer' }}
+          onClick={() => setShowSponsors(!showSponsors)}
+        >
+          {showSponsors ? 'Ocultar Sponsors' : 'Ver Sponsors'}
+        </button>
       </div>
 
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {loading && <div>Cargando batallas...</div>}
 
       {showLog && !loading && <BattleLog battles={battles} />}
+      {showSponsors && <SponsorLog />}
     </div>
   );
 };

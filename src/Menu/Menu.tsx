@@ -21,7 +21,7 @@ const Menu: React.FC<MenuProps> = ({ onLogout }) => {
         <li><Link to="/home" style={{ textDecoration: 'none', color: 'white' }}>Inicio</Link></li>
         <li><Link to="/esclavos" style={{ textDecoration: 'none', color: 'white' }}>Esclavos</Link></li>
         <li><Link to="/battles" style={{ textDecoration: 'none', color: 'white' }}>Batallas</Link></li>
-        <li><Link to="/dictators" style={{ textDecoration: 'none', color: 'white' }}>Dictadores</Link></li>
+        <li><Link to="/dictadors" style={{ textDecoration: 'none', color: 'white' }}>Dictadores</Link></li>
         <li><Link to="/market" style={{ textDecoration: 'none', color: 'white' }}>Mercado Negro</Link></li>
         <li>
           <button

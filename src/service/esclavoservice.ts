@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_BASE_URL } from '../config/config'; // Asegúrate que esta ruta es correcta según tu estructura
+import { API_BASE_URL } from '../config/config'; 
 
 export const getEsclavos = async () => {
   try {

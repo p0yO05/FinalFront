@@ -1,119 +1,150 @@
-// src/component/Battles/CreateBattle.tsx
-import React, { useState, useEffect } from 'react';
-import api from '../../utils/api';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-// Definir la interfaz de respuesta esperada de la API
-interface BattleResponse {
+interface Slave {
   id: string;
   name: string;
-  description: string;
-  organizerId: string;
 }
 
-const CreateBattle = () => {
+const CreateBattle: React.FC = () => {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [contestant1, setContestant1] = useState("");
+  const [contestant2, setContestant2] = useState("");
+  const [slaves, setSlaves] = useState<Slave[]>([]);
   const navigate = useNavigate();
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [organizerId, setOrganizerId] = useState(''); // Este debería venir del login
-  const [contestants, setContestants] = useState<BattleResponse[]>([]);
-  const [contestant1, setContestant1] = useState('');
-  const [contestant2, setContestant2] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
 
+  // 🔄 Obtener esclavos
   useEffect(() => {
-    // Fetch concursantes del backend
-    const fetchContestants = async () => {
+    const fetchSlaves = async () => {
       try {
-        const response = await api.get<BattleResponse[]>('/esclavos');
-        setContestants(response.data);
+        const response = await axios.get("http://localhost:3000/api/esclavos");
+        setSlaves(response.data);
       } catch (error) {
-        console.error('Error al obtener concursantes:', error);
+        console.error("Error al obtener esclavos:", error);
       }
     };
-    fetchContestants();
-
-    // Simulación de organizador si no tienes login aún
-    setOrganizerId('YOUR_DICTADOR_ID_AQUI');
+    fetchSlaves();
   }, []);
 
+  // ⚔️ Enviar solo el JSON y solicitar la batalla completa después
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErrorMsg('');
 
-    if (contestant1 === contestant2) {
-      setErrorMsg('Los concursantes deben ser distintos');
+    // 🚨 Validaciones básicas
+    if (!contestant1 || !contestant2) {
+      alert("Selecciona dos concursantes.");
       return;
     }
 
-    const battleData = {
+    if (contestant1 === contestant2) {
+      alert("Los concursantes deben ser diferentes.");
+      return;
+    }
+
+    const organizerId = "fe361c19-45d7-4c4c-9527-ec7ec262a9b8"; // 🏛️ ID fijo del dictador existente
+
+    // 📤 Crear JSON inicial para enviar al backend
+    const payload = {
       name,
       description,
       organizerId,
       contestant_1_id: contestant1,
-      contestant_2_id: contestant2,
+      contestant_2_id: contestant2
     };
 
     try {
-      const response = await api.post<BattleResponse>('/battle', battleData);
-      console.log('Batalla creada:', response.data);
-      navigate(`/narrar-batalla/${response.data.id}`);
+      const response = await axios.post("http://localhost:3000/api/battles", payload);
+      const battleInfo = response.data; // 🔥 El backend aún no ha calculado los eventos
+
+      console.log("JSON de batalla enviado al backend:", battleInfo);
+
+      // ⏳ Esperar unos segundos antes de solicitar la batalla con los eventos generados
+      setTimeout(async () => {
+        try {
+          const finalBattleResponse = await axios.get(`http://localhost:3000/api/battles/${battleInfo.id}`);
+          const finalBattle = finalBattleResponse.data;
+
+          console.log("Batalla final generada con eventos:", finalBattle);
+
+          // 🚀 Redirigir a `BattleResolution.tsx` con la batalla ya procesada
+          navigate("/battle-resolution", { state: { battle: finalBattle } });
+
+        } catch (error) {
+          console.error("Error al obtener la batalla completa:", error);
+          alert("Error al obtener la batalla con eventos generados.");
+        }
+      }, 3000); // Se espera 3 segundos antes de pedir los datos completos
+
     } catch (error: any) {
-      setErrorMsg(error?.response?.data?.message || 'Error al crear batalla');
-      console.error('Error al crear batalla:', error);
+      console.error("Error al enviar batalla inicial:", error);
+      alert(error.response?.data?.message || "Error al enviar la batalla inicial");
     }
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Crear Nueva Batalla</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-6 p-6">
+      <h2 className="text-2xl font-bold">⚔️ Crear Batalla ⚔️</h2>
+
+      <label className="text-lg">
+        Nombre del evento:
         <input
           type="text"
-          placeholder="Nombre del evento"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full p-2 border"
           required
+          className="p-2 rounded border border-gray-300"
         />
+      </label>
+
+      <label className="text-lg">
+        Descripción (Opcional):
         <textarea
-          placeholder="Descripción (opcional)"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="w-full p-2 border"
+          className="p-2 rounded border border-gray-300"
         />
+      </label>
+
+      <label className="text-lg">
+        Concursante 1:
         <select
           value={contestant1}
           onChange={(e) => setContestant1(e.target.value)}
-          className="w-full p-2 border"
           required
+          className="p-2 rounded border border-gray-300"
         >
-          <option value="">Selecciona el Primer Concursante</option>
-          {contestants.map((c) => (
-            <option key={c.id} value={c.id}>
-              {c.name}
+          <option value="">Selecciona un esclavo</option>
+          {slaves.map((slave) => (
+            <option key={slave.id} value={slave.id}>
+              {slave.name}
             </option>
           ))}
         </select>
+      </label>
+
+      <label className="text-lg">
+        Concursante 2:
         <select
           value={contestant2}
           onChange={(e) => setContestant2(e.target.value)}
-          className="w-full p-2 border"
           required
+          className="p-2 rounded border border-gray-300"
         >
-          <option value="">Selecciona el Segundo Concursante</option>
-          {contestants.map((c) => (
-            <option key={c.id} value={c.id}>
-              {c.name}
+          <option value="">Selecciona un esclavo</option>
+          {slaves.map((slave) => (
+            <option key={slave.id} value={slave.id}>
+              {slave.name}
             </option>
           ))}
         </select>
-        <button type="submit" className="bg-red-600 text-white px-4 py-2 rounded">
-          Iniciar Batalla
-        </button>
-      </form>
-      {errorMsg && <div className="text-red-600">{errorMsg}</div>}
-    </div>
+      </label>
+
+      <button type="submit" className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+        ⚔️ Crear Batalla
+      </button>
+    </form>
   );
 };
 
