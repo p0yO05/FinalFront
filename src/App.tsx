@@ -16,6 +16,7 @@ import PrivateRoute from './components/privateroute';
 import Logo from './components/Shared/logo';
 import DictadorPersonalProfile from './components/Profile/Dictadorprofile';
 import Spoted from './components/Login/Spoted'; // <-- Importa el componente épico
+import CreateSponsors from './components/Sponsors/Createsponsors'; // 📌 Importa la página de asignación de sponsors
 import './styles/darktheme.css';
 
 const App: React.FC = () => {
@@ -47,10 +48,6 @@ const App: React.FC = () => {
           {/* Crear batalla (versión final recomendada) */}
           <Route path="/create-battle" element={<PrivateRoute isAuthenticated={isAuthenticated} element={<CreateFight />} />} />
 
-          {/* Otras rutas de pruebas o alternativas */}
-          <Route path="/batalloso" element={<PrivateRoute isAuthenticated={isAuthenticated} element={<CreateFight />} />} />
-          <Route path="/Real" element={<PrivateRoute isAuthenticated={isAuthenticated} element={<CreateBattle slaves={[]} organizerId={role || ''} />} />} />
-
           {/* Resolución de batalla */}
           <Route path="/battle-resolution" element={<PrivateRoute isAuthenticated={isAuthenticated} element={<BattleResolution />} />} />
 
@@ -61,6 +58,9 @@ const App: React.FC = () => {
           <Route path="/black-market" element={<PrivateRoute isAuthenticated={isAuthenticated} element={<Createtrade />} />} />
           <Route path="/trade" element={<PrivateRoute isAuthenticated={isAuthenticated} element={<Trading />} />} />
           <Route path="/receipt" element={<PrivateRoute isAuthenticated={isAuthenticated} element={<Receipt />} />} />
+
+          {/* 🌟 Nueva ruta para asignación de sponsors */}
+          <Route path="/create-sponsor" element={<PrivateRoute isAuthenticated={isAuthenticated} element={<CreateSponsors />} />} />
 
           {/* Ruta épica de descubierto */}
           <Route path="/descubierto" element={<Spoted />} />

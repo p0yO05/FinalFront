@@ -13,7 +13,7 @@ interface Esclavo {
   nickname: string;
 }
 
-// 10 dictadores falsos
+// Datos ficticios para pruebas
 const fakeDictadores: Dictador[] = [
   { id: "1", name: "Augusto", territory: "Chile" },
   { id: "2", name: "Leónidas", territory: "Esparta" },
@@ -26,7 +26,7 @@ const fakeDictadores: Dictador[] = [
   { id: "9", name: "Trujillo", territory: "R.D." },
   { id: "10", name: "Franco", territory: "España" },
 ];
-// 5 esclavos falsos
+
 const fakeEsclavos: Esclavo[] = [
   { id: "a", nickname: "Toby" },
   { id: "b", nickname: "Chucho" },
@@ -63,14 +63,14 @@ const CreateTradeOffers: React.FC = () => {
 
   return (
     <div className="w-full max-w-3xl mx-auto bg-gray-900 rounded-lg shadow-lg p-6">
-      <h2 className="text-2xl font-bold text-yellow-200 mb-4">Tienda Falsa del Mercado</h2>
+      <h2 className="text-2xl font-bold text-yellow-200 mb-4">Tienda 100% Real no Fake Mercado</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {offers.map((offer, idx) => (
           <div key={offer.sellerId + offer.item + idx} className="bg-gray-800 rounded-lg p-4 shadow flex flex-col">
             <div className="mb-2">
               <span className="font-semibold text-yellow-300">{offer.item}</span>
             </div>
-            <div className="mb-2 text-gray-200">{offer.description}</div>
+            <div className="mb-2 text-gray-200">{offer.description}</div> {/* Ahora con la nueva descripción */}
             <div className="mb-2 text-gray-400">
               <span>Vendedor ID: </span>
               <span className="font-semibold">{offer.sellerId}</span>

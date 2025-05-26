@@ -45,7 +45,7 @@ const Createtrade: React.FC = () => {
   }, []);
 
   const handleNegociar = (offer: CreateBlackmarketDto) => {
-    // Filtrar `description` antes de navegar
+    // Filtrar `description` antes de navegar, pero mantenerla en la UI
     const { description, ...sanitizedOffer } = offer;
     navigate("/trade", { state: { offer: sanitizedOffer } });
   };
@@ -71,14 +71,14 @@ const Createtrade: React.FC = () => {
               <div className="mb-2">
                 <span className="font-semibold text-yellow-300">{offer.item}</span>
               </div>
-              <div className="mb-2 text-gray-200">{offer.description}</div> {/* Se muestra, pero no se envía */}
+              <div className="mb-2 text-gray-200">{offer.description}</div> {/* Descripción agregada correctamente */}
               <div className="mb-2 text-gray-400">
                 <span>Vendedor ID: </span>
                 <span className="font-semibold">{offer.sellerId}</span>
               </div>
               <div className="mb-2 text-gray-400">
                 <span>Precio: </span>
-                <span className="font-semibold">{offer.amount}</span>
+                <span className="font-semibold">{offer.amount}</span> {/* Formato correcto "500.00" */}
               </div>
               <div className="mb-2 text-gray-400">
                 <span>Tipo: </span>
