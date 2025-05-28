@@ -37,7 +37,6 @@ const Battles: React.FC = () => {
   }, [showLog]);
 
   return (
-    <>
     <div style={{ padding: '20px', backgroundColor: '#1e1e1e', color: 'white' }}>
       <h1 style={{ marginBottom: '20px' }}>Batallas</h1>
       <p>Registra y consulta los enfrentamientos entre tus concursantes.</p>
@@ -71,8 +70,6 @@ const Battles: React.FC = () => {
       {showLog && !loading && <BattleLog battles={battles} />}
       {showSponsors && <SponsorLog />}
     </div>
-    <BattleResolution/>
-    </>
   );
 };
 
