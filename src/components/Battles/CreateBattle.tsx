@@ -84,66 +84,56 @@ const CreateBattle: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-6 p-6">
-      <h2 className="text-2xl font-bold">⚔️ Crear Batalla ⚔️</h2>
-
-      <label className="text-lg">
-        Nombre del evento:
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          className="p-2 rounded border border-gray-300"
-        />
-      </label>
-
-      <label className="text-lg">
-        Descripción (Opcional):
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="p-2 rounded border border-gray-300"
-        />
-      </label>
-
-      <label className="text-lg">
-        Concursante 1:
-        <select
+    <form onSubmit={handleSubmit} style={{ padding: '15px', backgroundColor: '#333', color: 'white' }}>
+      <h2>Formulario de Batallas</h2>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
+                <select
           value={contestant1}
           onChange={(e) => setContestant1(e.target.value)}
           required
-          className="p-2 rounded border border-gray-300"
         >
-          <option value="">Selecciona un esclavo</option>
+          <option value="">Esclavo 1</option>
           {slaves.map((slave) => (
             <option key={slave.id} value={slave.id}>
               {slave.name}
             </option>
           ))}
         </select>
-      </label>
-
-      <label className="text-lg">
-        Concursante 2:
         <select
           value={contestant2}
           onChange={(e) => setContestant2(e.target.value)}
           required
-          className="p-2 rounded border border-gray-300"
         >
-          <option value="">Selecciona un esclavo</option>
+          <option value="">Esclavo 2</option>
           {slaves.map((slave) => (
             <option key={slave.id} value={slave.id}>
               {slave.name}
             </option>
           ))}
-        </select>
-      </label>
+       </select>
+        
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Name"
+          required
+          style={{ gridColumn: '1 / 3' }}
+        />
+        <textarea
+          placeholder="Descripcion"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          style={{ gridColumn: '1 / 3', height: '100px' }}
+        />
 
-      <button type="submit" className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
-        ⚔️ Crear Batalla
-      </button>
+       <button
+          type="submit"
+          style={{ backgroundColor: '#444', color: 'white', padding: '10px 20px', border: 'none', cursor: 'pointer', gridColumn: '1 / 3' }}
+        >
+          Agregar Batalla 
+        </button>
+      </div>
     </form>
   );
 };

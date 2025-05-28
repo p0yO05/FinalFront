@@ -4,7 +4,8 @@ import { getBattles } from '../service/battleservice';
 import BattleLog from '../components/Battles/Battlelog';
 import { Battle } from '../types/types';
 import SponsorLog from '../components/Sponsors/sponsorlog';
-
+import CreateBattle from '../components/Battles/CreateBattle';
+import BattleResolution from '../components/Battles/BattleResolution';
 const Battles: React.FC = () => {
   const navigate = useNavigate();
   const [showLog, setShowLog] = useState(false);
@@ -12,7 +13,7 @@ const Battles: React.FC = () => {
   const [battles, setBattles] = useState<Battle[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-
+  const [showCreateBattle, setShowCreateBattle] = useState(false);
   const fetchBattles = async () => {
     setLoading(true);
     setError('');
@@ -36,6 +37,7 @@ const Battles: React.FC = () => {
   }, [showLog]);
 
   return (
+    <>
     <div style={{ padding: '20px', backgroundColor: '#1e1e1e', color: 'white' }}>
       <h1 style={{ marginBottom: '20px' }}>Batallas</h1>
       <p>Registra y consulta los enfrentamientos entre tus concursantes.</p>
@@ -43,11 +45,11 @@ const Battles: React.FC = () => {
       <div style={{ display: 'flex', gap: '10px', margin: '20px 0' }}>
         <button
           style={{ backgroundColor: '#444', color: 'white', padding: '10px 20px', border: 'none', cursor: 'pointer' }}
-          onClick={() => navigate('/create-battle')}
+          onClick={() => setShowCreateBattle(!showCreateBattle)}
         >
           Crear Batalla
         </button>
-
+        
         <button
           style={{ backgroundColor: '#444', color: 'white', padding: '10px 20px', border: 'none', cursor: 'pointer' }}
           onClick={() => setShowLog(!showLog)}
@@ -62,13 +64,15 @@ const Battles: React.FC = () => {
           {showSponsors ? 'Ocultar Sponsors' : 'Ver Sponsors'}
         </button>
       </div>
-
+      {showCreateBattle && <CreateBattle/>}
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {loading && <div>Cargando batallas...</div>}
 
       {showLog && !loading && <BattleLog battles={battles} />}
       {showSponsors && <SponsorLog />}
     </div>
+    <BattleResolution/>
+    </>
   );
 };
 

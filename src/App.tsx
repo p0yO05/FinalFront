@@ -5,7 +5,6 @@ import Home from './Pages/Home';
 import Contestants from './Pages/Esclavos';
 import Battles from './Pages/Battles';
 import CreateFight from './components/Battles/CreateBattle';
-import CreateBattle from './components/Battles/BattleArena';
 import BattleResolution from './components/Battles/BattleResolution';
 import Dictators from './Pages/Dictadors';
 import Market from './Pages/BlackMarket';

@@ -13,37 +13,10 @@ const getTwoRandomImages = (): [string, string] => {
   return [shuffled[0], shuffled[1]];
 };
 
-const mockBattle = {
-  contestant_1: {
-    id: 1,
-    nickname: "Amerikano",
-    name: "Amerikano",
-    image: amerikano,
-  },
-  contestant_2: {
-    id: 2,
-    nickname: "El Atrocidade",
-    name: "El Atrocidade",
-    image: elAtrocidade,
-  },
-  narration: [
-    "Amerikano lanza un poderoso golpe.",
-    "El Atrocidade esquiva ágilmente y contraataca.",
-    "La batalla se intensifica con cada movimiento.",
-    "Finalmente, Amerikano logra la victoria."
-  ],
-  winner: {
-    id: 1,
-    nickname: "Amerikano",
-    name: "Amerikano",
-  },
-  winner_id: 1,
-};
-
 const BattleResolution: React.FC = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const battle = mockBattle;
+  const battle = state?.battle;
 
   if (!battle) {
     return (
@@ -104,8 +77,7 @@ const BattleResolution: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center px-6 py-8 space-y-6 min-h-screen">
-      HOlaa
-      {narrationLines.length > 0 ?  (
+      {narrationLines.length > 0 ? (
         narrationLines.map((text: string, idx: number) => (
           <div
             key={idx}
@@ -116,8 +88,8 @@ const BattleResolution: React.FC = () => {
                 <img
                   src={img1}
                   alt={name1}
-                  className="w-32 h-32 object-fit rounded shadow-xl border-4 border-indigo-600"
-                  style={{ aspectRatio: "1 / 1", objectFit: "contain" }}
+                  className="w-32 h-32 object-cover rounded shadow-xl border-4 border-indigo-600"
+                  style={{ aspectRatio: "1 / 1", objectFit: "cover" }}
                 />
                 <span
                   className="mt-2 text-lg font-extrabold text-indigo-100 text-center tracking-wide"
